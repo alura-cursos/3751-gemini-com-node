@@ -1,13 +1,9 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { inicializaModelo } from './modelo.js';
 import { fazerPergunta } from './pergunta.js';
 
-// Access your API key as an environment variable (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = await inicializaModelo("gemini-1.0-pro");
 
 async function run() {
-  // For text-only input, use the gemini-pro model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
   const categorias = await fazerPergunta("Me fale as categorias que deseja visualizar sobre um determinado destino: ");
   const prompt = await fazerPergunta("Me fale sobre o destino que deseja conhecer: ");
 
